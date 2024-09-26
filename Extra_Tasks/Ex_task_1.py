@@ -52,6 +52,7 @@
       "source": [
         "import random\n",
         "number=random.randint(0,100)\n",
+        "print('Компьютер загадал число %s', number)\n",
         "m=0 # счётчик количества попыток\n",
         "while True:\n",
         "  d=input('Введите число: ')\n",
