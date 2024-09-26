@@ -57,7 +57,7 @@
         "while True:\n",
         "  d=input('Введите число: ')\n",
         "  m+=1\n",
-        "  if d=='Выход': break\n",
+        "  if d=='Выход' or not(int(number).isdigit()): break\n",
         "  elif int(d)==number:\n",
         "    print('Поздравляем! Вы угадали число за %s попытки!' % m)\n",
         "    break\n",
