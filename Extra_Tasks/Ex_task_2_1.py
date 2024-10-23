@@ -787,7 +787,7 @@
       "source": [
         "from functools import reduce\n",
         "words = [(lambda x: str(i))(i) for i in input().split()]\n",
-        "otvet = len(reduce(lambda x, y: x+y, list(filter(lambda x: x if x in ['a', 'e', 'i', 'o', 'u'] else None, (sum(list(map(lambda x: [i for i in x], words)), []))))))\n",
+        "otvet = len(reduce(lambda x, y: x+y, list(filter(lambda x: x if x in ['y', 'a', 'e', 'i', 'o', 'u'] else None, (sum(list(map(lambda x: [i for i in x], words)), []))))))\n",
         "print(otvet)"
       ],
       "metadata": {
