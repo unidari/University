@@ -804,7 +804,7 @@
           "name": "stdout",
           "text": [
             "phyton lambda functions map filter reduce\n",
-            "12\n"
+            "13\n"
           ]
         }
       ]
