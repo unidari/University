@@ -1,5 +1,6 @@
 import re
-import urllib.request
+import csv
+import urllib.request 
 
 url = "https://msk.spravker.ru/avtoservisy-avtotehcentry/"
 response = urllib.request.urlopen(url)
@@ -11,7 +12,7 @@ match = re.findall(pattern, html_content)
 
 with open('data.csv', 'w', newline='') as file:
     writer = csv.writer(file)
-    writer.writerow(['Название', 'Адрес', 'Номер', 'Время работы'])
+    writer.writerow(['Название', 'Адрес', 'Телефон', 'Рабочие часы'])
 
     for i in match:
         writer.writerow(i)
@@ -21,8 +22,8 @@ matches = re.finditer(pattern, html_content)
 for match in matches:
     print("Название:", match.group('name'))
     print("Адрес:", match.group('address'))
-    print("Номер:", match.group('phone'))
-    print("Время работы:", match.group('workhours'))
+    print("Телефон:", match.group('phone'))
+    print("Рабочие часы:", match.group('workhours'))
     print("\n")
 
 if not re.search(pattern, html_content):
