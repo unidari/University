@@ -1,9 +1,9 @@
 import PySimpleGUI as sg
 
 
-import Functions.compress_image
-import Functions.file_manager
-import Functions.pdf_docx
+import functions.compress_image
+import functions.file_manager
+import functions.pdf_docx
 
 
 def checkFormats(dirc):
@@ -32,7 +32,7 @@ def checkFormats(dirc):
 
 def pdftodocx(option, docs):
     try:
-        Functions.pdf_docx.pdf_to_docx(option, docs)
+        functions.pdf_docx.pdf_to_docx(option, docs)
         sg.popup('Успешно!')
     except:
         sg.popup('Произошла ошибка!')
@@ -40,7 +40,7 @@ def pdftodocx(option, docs):
 
 def docxtopdf(option, docs):
     try:
-        Functions.pdf_docx.docx_to_pdf(option, docs)
+        functions.pdf_docx.docx_to_pdf(option, docs)
         sg.popup('Успешно!')
     except:
         sg.popup('Произошла ошибка!')
@@ -48,7 +48,7 @@ def docxtopdf(option, docs):
 
 def compress_img(option, images, compression):
     try:
-        Functions.compress_image.compress_img(option, images, compression)
+        functions.compress_image.compress_img(option, images, compression)
         if int(compression) not in range(1,101):
             raise Exception
         sg.popup('Успешно!')
@@ -57,8 +57,8 @@ def compress_img(option, images, compression):
 
 def delFiles(substr, type):
     try:
-        if Functions.file_manager.find_files(substr, type=type) != {}:
-            Functions.file_manager.delete_files(str(type), substr)
+        if functions.file_manager.find_files(substr, type=type) != {}:
+            functions.file_manager.delete_files(str(type), substr)
             sg.popup('Успешно!')
         else:
             sg.popup('Файлы не найдены!')
@@ -91,7 +91,7 @@ def create_selection_window():
 
 sg.theme('DarkPurple4')
 layout_left = [
-    [sg.Text(f"Рабочий каталог: "), sg.Text(Functions.file_manager.current_directory(), key='dirtext'), sg.Button('Выбрать каталог')],
+    [sg.Text(f"Рабочий каталог: "), sg.Text(functions.file_manager.current_directory(), key='dirtext'), sg.Button('Выбрать каталог')],
     [sg.Listbox(values=[], select_mode=sg.LISTBOX_SELECT_MODE_EXTENDED, enable_events=True, size=(60, 20), key='file_dir')],
     [sg.Button('Выход')]
 ]
@@ -105,7 +105,7 @@ layout_right = [
 layout = [[sg.Column(layout_left), sg.VSeperator(), sg.Column(layout_right)]]
 
 main_window, del_win, sel_win = sg.Window('Основное окно', layout, finalize=True, icon='thumbnail.ico'), None, None
-main_window['file_dir'].update(Functions.file_manager.os.listdir())
+main_window['file_dir'].update(functions.file_manager.os.listdir())
 flag = 0
 while True:
     window, event, values = sg.read_all_windows()
@@ -113,10 +113,10 @@ while True:
         break
     elif window == main_window and event == 'Выбрать каталог':
         try:
-            Functions.file_manager.os.chdir(sg.popup_get_folder('Выберите папку', title='Выбор папки'))
-            main_window['dirtext'].update(Functions.file_manager.current_directory())
+            functions.file_manager.os.chdir(sg.popup_get_folder('Выберите папку', title='Выбор папки'))
+            main_window['dirtext'].update(functions.file_manager.current_directory())
             main_window['file_dir'].update('')
-            main_window['file_dir'].update(Functions.file_manager.os.listdir())
+            main_window['file_dir'].update(functions.file_manager.os.listdir())
         except TypeError:
             pass
         except:
@@ -155,25 +155,25 @@ while True:
             delFiles(values['substr'], 3)
         elif values[3]:
             delFiles(values['substr'], 0)
-        main_window['file_dir'].update(Functions.file_manager.os.listdir())
+        main_window['file_dir'].update(functions.file_manager.os.listdir())
     elif window == sel_win and event in (sg.WINDOW_CLOSED, 'Выйти'):
         sel_win.close()
     elif window == sel_win and event == 'Продолжить' and values[0] or values[1]:
         if flag == 1:
             if values[0]:
-                pdftodocx('0', Functions.file_manager.find_files('.pdf', type=0))
+                pdftodocx('0', functions.file_manager.find_files('.pdf', type=0))
             else:
                 pdftodocx('1', sel_files)
         elif flag == 2:
             if values[0]:
-                docxtopdf('0', Functions.file_manager.find_files('.docx', type=0))
+                docxtopdf('0', functions.file_manager.find_files('.docx', type=0))
             else:
                 docxtopdf('1', sel_files)
         elif flag == 3:
             if values[0]:
-                compress_img('0', Functions.file_manager.find_files('.jpg', '.jpeg', '.gif', '.png', type=0), values['compression'])
+                compress_img('0', functions.file_manager.find_files('.jpg', '.jpeg', '.gif', '.png', type=0), values['compression'])
             else:
                 compress_img('1', sel_files, values['compression'])
-        main_window['file_dir'].update(Functions.file_manager.os.listdir())
+        main_window['file_dir'].update(functions.file_manager.os.listdir())
 
 main_window.close()
