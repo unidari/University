@@ -1,4 +1,4 @@
-from logic import makeMove, chooseWord, setTries, showWord, record_update
+from logic import makeMove, chooseWord, setTries, showWord, record
 
 print("Добрый вечер! Здравствуйте, уважаемые дамы и господа! Пятница! В эфире капитал-шоу «Поле чудес»!")
 print('В игре есть 3 уровня сложности:')
