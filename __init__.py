@@ -1,1 +1,1 @@
-__all__ = ['game_components', 'words']
+__all__ = ['components', 'words_random']
