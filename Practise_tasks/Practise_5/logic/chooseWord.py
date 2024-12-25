@@ -3,7 +3,7 @@ from random import choice
 
 def chooseWord():
     try:
-        file = open('gameLogic/words.txt', encoding='utf8')  # Открытие файла с параметрами по умолчанию (для чтения)
+        file = open('logic/words.txt', encoding='utf8')  # Открытие файла с параметрами по умолчанию (для чтения)
     except FileNotFoundError:
         print("Файл не найден. Укажите путь к файлу вручную.")
         exit()
