@@ -1,5 +1,5 @@
-from game_components import *
-from words import *
+from components import *
+from words_random import *
 
 print('Это Поле Чудес! Удачной игры!')
 
