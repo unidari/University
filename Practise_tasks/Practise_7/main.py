@@ -1,8 +1,9 @@
-import os
 import PySimpleGUI as sg
-from pdf2docx import Converter
-from docx2pdf import convert
-from PIL import Image
+
+
+import functions.compress_image
+import functions.file_manager
+import functions.pdf_docx
 
 def compress_image(file, quality):
     img = Image.open(file)
